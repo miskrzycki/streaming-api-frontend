@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(48, 190, 48);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header_logo {
+  height: 25px;
+  margin-left: 10px;
+}
+
+.header_input {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.header_left {
+  display: flex;
+  align-items: center;
+}
