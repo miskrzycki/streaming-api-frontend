@@ -3,11 +3,13 @@ import { Typography, Button, Form, message, Input } from 'antd';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { ImageOutlined, LineAxisOutlined } from '@mui/icons-material';
+import { response } from 'express';
 
 const UploadVideo = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [FilePath, setFilePath] = useState("")
   const [videos, setVideos] = useState([]);
 
    const handleChangeTitle = ( event ) => {
@@ -22,8 +24,23 @@ const UploadVideo = () => {
         setImageUrl(event.currentTarget.value)
     }
 
-    const onSubmit = () => {
-        
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+        const variables = {
+            title: title,
+            author: author,
+            imageUrl: imageUrl,
+        }
+
+        axios.post('/api/video/uploadVideo', variables)
+            .then(response => {
+                if(response.data.success) {
+
+                } else {
+                    alert('Failed to upload video')
+                }
+            })
     }
 
     const onDrop = ( files ) => {
@@ -38,15 +55,13 @@ const UploadVideo = () => {
         axios.post('/api/video/uploadfiles', formData, config)
         .then(response=> {
             if(response.data.success){
-
                 let variable = {
                     filePath: response.data.filePath,
                     fileName: response.data.fileName
                 }
-                //setFilePath(response.data.filePath)
-
-                //gerenate thumbnail with this filepath ! 
                 
+                setFilePath(response.data.filePath)
+              
             } else {
                 alert('failed to save the video in server')
             }
@@ -57,29 +72,24 @@ const UploadVideo = () => {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h2> Upload Video</h2>
+            <h2> Upload Form</h2>
         </div>
 
         <Form onSubmit={onSubmit}>
+            <label>File</label>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Dropzone 
                     onDrop={onDrop}
                     multiple={false}
                     maxSize={800000000}>
                     {({ getRootProps, getInputProps }) => (
-                        <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        <div style={{ width: '300px', height: '140px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                             {...getRootProps()}
                         >
                             <input {...getInputProps()} />
                         </div>
                     )}
                 </Dropzone>
-
-                {/* {thumbnail !== "" &&
-                    <div>
-                        <img src={`http://localhost:5000/${thumbnail}`} alt="haha" />
-                    </div>
-                } */}
             </div>
 
             <br /><br />

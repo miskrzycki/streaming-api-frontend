@@ -13,9 +13,9 @@ function MainPageVideos() {
       <section className='videoList'>
         {data.map((video) => {
           return (
-            <div className="mainPageVideos_videos"  key={video.title}>
-              <SpecyficVideo key={video.title} {...video} />
-            </div>
+              <div className="mainPageVideos_videos"  key={video.title}>
+                <SpecyficVideo key={video.title} {...video} />
+              </div>
           )
         })}
       </section>

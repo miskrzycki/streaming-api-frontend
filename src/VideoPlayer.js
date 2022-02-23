@@ -5,18 +5,15 @@ import ReactHlsPlayer from 'react-hls-player';
 import './styles/MainPageVideos.css';
 import { currentVideoUrl } from './Video';
 import Video from './Video';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Routes, Route, useParams } from 'react-router-dom';
 
 
 function VideoPlayer(props) {
 
-    //console.log('Video Player', props)
-
-    const [hlsUrl, setHlsUrl] = useState(
-    "http://localhost:8080/streaming-api/test/test_master.m3u8"
-  );
-
-
+    const {url} = useParams()
+    const decodedUrl = decodeURIComponent(url)
+    const [hlsUrl, setHlsUrl] = useState(decodedUrl);
+ 
     return (
         <div className="mainPageVideos">
             <div className="videoUrl">

@@ -23,7 +23,25 @@ function App() {
             </>
           } />
 
-           <Route exact path="/player" element={
+          <Route exact path="/search" element={
+            <>
+            <div className='app_page'>
+              <Sidebar />
+              <h1>Search Page</h1>
+            </div>  
+            </>
+          } />
+
+           <Route exact path="/player/:url" element={
+            <>
+            <div className='app_page'>
+              <Sidebar />
+              <VideoPlayer />
+            </div>  
+            </>
+          } />
+
+          <Route exact path="/player" element={
             <>
             <div className='app_page'>
               <Sidebar />
