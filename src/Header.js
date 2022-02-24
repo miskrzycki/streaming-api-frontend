@@ -15,8 +15,8 @@ function Header() {
             </div>
 
             <div className="header_input">
-                <input onChange={e => setInputSearch(e.target.value)} value={inputSearch} type="text" />
-                <Link to={'search/${inputSearch}'}>
+                <input onChange={e => setInputSearch(e.target.value)} value={inputSearch} type="text"  />
+                <Link to={'/search/' + encodeURIComponent(inputSearch)}>
                     <SearchRoundedIcon />
                 </Link>
             </div>

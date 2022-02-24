@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import MainPageVideos from './MainPageVideos';
 import VideoPlayer from './VideoPlayer'; 
 import UploadVideo from './UploadVideo';
+import SearchPage from './SearchPage';
 import './styles/App.css';
 
 function App() {
@@ -23,11 +24,20 @@ function App() {
             </>
           } />
 
-          <Route exact path="/search" element={
+          <Route exact path="/search/:inputSearch" element={
             <>
             <div className='app_page'>
               <Sidebar />
-              <h1>Search Page</h1>
+              <SearchPage />
+            </div>  
+            </>
+          } />
+
+           <Route exact path="/search/" element={
+            <>
+            <div className='app_page'>
+              <Sidebar />
+              <SearchPage />
             </div>  
             </>
           } />

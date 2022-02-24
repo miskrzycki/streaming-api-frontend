@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, State } from "react-router-dom";
 import './styles/Video.css';
-import VideoPlayer from './VideoPlayer';
 
 const Video = ({ title, author, image, url}) => {
 
