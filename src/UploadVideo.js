@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, Component} from 'react'
 import { Typography, Button, Form, message, Input } from 'antd';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
@@ -7,67 +7,48 @@ import { ImageOutlined, LineAxisOutlined } from '@mui/icons-material';
 
 const UploadVideo = () => {
   const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [FilePath, setFilePath] = useState("")
-  const [videos, setVideos] = useState([]);
+  const [description, setDescription] = useState('');
+  const [videoFile, setVideoFile] = useState('');
+  const [imageFile, setImageFile] = useState('');
 
    const handleChangeTitle = ( event ) => {
         setTitle(event.currentTarget.value)
     }
 
-    const handleChangeAuthor = (event) => {
-        setAuthor(event.currentTarget.value)
+    const handleChangeDescription = (event) => {
+        setDescription(event.currentTarget.value)
     }
 
-    const handleChangeImageUrl = (event) => {
-        setImageUrl(event.currentTarget.value)
+    const handleVideoFileSelect = (event) => {
+        setVideoFile(event.target.files[0]);
+        console.log(event.target.files[0]);
     }
 
-    const onSubmit = (event) => {
-        event.preventDefault();
+    const handleImageFileSelect = (event) => {
+        setImageFile(event.target.files[0]);
+        console.log(event.target.files[0]);
+    }
 
-        const variables = {
-            title: title,
-            author: author,
-            imageUrl: imageUrl,
+    const onSubmit = async(event) => {
+        event.preventDefault()
+        const formData = new FormData();
+
+        formData.append("content", videoFile);
+        formData.append("name", title);
+        formData.append("description", description);
+        formData.append("thumbnail", imageFile);
+
+        try {
+        const response = await axios({
+            method: "post",
+            url: "http://localhost:8080/streaming-api/video",
+            data: formData,
+        });
+        } catch(error) {
+        console.log(error)
         }
-
-        axios.post('/api/video/uploadVideo', variables)
-            .then(response => {
-                if(response.data.success) {
-
-                } else {
-                    alert('Failed to upload video')
-                }
-            })
     }
 
-    const onDrop = ( files ) => {
-
-        let formData = new FormData();
-        const config = {
-            header: { 'content-type': 'multipart/form-data' }
-        }
-        console.log(files)
-        formData.append("file", files[0])
-
-        axios.post('/api/video/uploadfiles', formData, config)
-        .then(response=> {
-            if(response.data.success){
-                let variable = {
-                    filePath: response.data.filePath,
-                    fileName: response.data.fileName
-                }
-                
-                setFilePath(response.data.filePath)
-              
-            } else {
-                alert('failed to save the video in server')
-            }
-        })
-
-    }
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -76,43 +57,38 @@ const UploadVideo = () => {
         </div>
 
         <Form onSubmit={onSubmit}>
-            <label>File</label>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Dropzone 
-                    onDrop={onDrop}
-                    multiple={false}
-                    maxSize={800000000}>
-                    {({ getRootProps, getInputProps }) => (
-                        <div style={{ width: '300px', height: '140px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                            {...getRootProps()}
-                        >
-                            <input {...getInputProps()} />
-                        </div>
-                    )}
-                </Dropzone>
-            </div>
-
+            
             <br /><br />
             <label>Title</label>
             <Input
-                 onChange={handleChangeTitle}
-                 value={title}
+                onChange={handleChangeTitle}
+                value={title}
             />
             <br /><br />
 
-            <label>Author</label>
+            <label>Description</label>
              <Input
-                 onChange={handleChangeAuthor}
-                 value={author}
+                onChange={handleChangeDescription}
+                value={description}
             />
             <br /><br />
 
-            <label>Image URL</label>
+            <label>Video file</label>
+            <br />
              <Input
-                 onChange={handleChangeImageUrl}
-                 value={imageUrl}
+                type="file"
+                onChange={handleVideoFileSelect}
             />
             <br /><br />
+
+             <label>Thumbnail file</label>
+             <br />
+             <Input
+                type="file"
+                onChange={handleImageFileSelect}
+            />
+            <br /><br />
+
 
 
             <Button type="primary" size="large" onClick={onSubmit}>

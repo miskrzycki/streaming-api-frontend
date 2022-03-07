@@ -10,8 +10,8 @@ import { useLocation, Routes, Route, useParams } from 'react-router-dom';
 
 function VideoPlayer(props) {
 
-    const {url} = useParams()
-    const decodedUrl = decodeURIComponent(url)
+    const {url} = useParams();
+    const decodedUrl = decodeURIComponent(url);
     const [hlsUrl, setHlsUrl] = useState(decodedUrl);
  
     return (

@@ -33,7 +33,7 @@ function App() {
             </>
           } />
 
-           <Route exact path="/search/" element={
+           <Route exact path="/search" element={
             <>
             <div className='app_page'>
               <Sidebar />
