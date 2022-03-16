@@ -3,6 +3,7 @@ import SidebarRow from './SidebarRow';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LocalMoviesRoundedIcon from '@mui/icons-material/LocalMoviesRounded';
 import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
+import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
 import './styles/Sidebar.css';
 import { Link } from "react-router-dom";
 
@@ -14,7 +15,7 @@ function Sidebar() {
             </Link>
 
             <Link to={'/player'}>
-            <SidebarRow Icon={FileUploadRoundedIcon} title="Player"/>
+            <SidebarRow Icon={PlayCircleFilledRoundedIcon} title="Player"/>
             </Link>
 
             <Link to={'/myvideos'}>

@@ -7,6 +7,7 @@ import { ImageOutlined, LineAxisOutlined } from '@mui/icons-material';
 
 const UploadVideo = () => {
   const [title, setTitle] = useState('');
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [videoFile, setVideoFile] = useState('');
   const [imageFile, setImageFile] = useState('');
@@ -17,6 +18,10 @@ const UploadVideo = () => {
 
     const handleChangeDescription = (event) => {
         setDescription(event.currentTarget.value)
+    }
+
+    const handleChangeName = (event) => {
+        setName(event.currentTarget.value)
     }
 
     const handleVideoFileSelect = (event) => {
@@ -34,10 +39,10 @@ const UploadVideo = () => {
         const formData = new FormData();
 
         formData.append("content", videoFile);
-        formData.append("name", title);
+        formData.append("name", name);
         formData.append("description", description);
         formData.append("thumbnail", imageFile);
-
+        formData.append("title", title);
         try {
         const response = await axios({
             method: "post",
@@ -45,10 +50,17 @@ const UploadVideo = () => {
             data: formData,
         });
         } catch(error) {
-        console.log(error)
+            console.log(error);
+            window.alert("Make sure that video file is a mp.4 file, image is .jpg file and title is unique");
         }
     }
 
+    const axios = require('axios');
+
+    axios.get("http://localhost:8080/video-details").then(resp => {
+
+        //console.log(resp.data);
+    });
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -59,6 +71,13 @@ const UploadVideo = () => {
         <Form onSubmit={onSubmit}>
             
             <br /><br />
+             <label>Name</label>
+            <Input
+                onChange={handleChangeName}
+                value={name}
+            />
+            <br /><br />
+
             <label>Title</label>
             <Input
                 onChange={handleChangeTitle}

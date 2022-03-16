@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
-import UploadVideo from './UploadVideo';
 import './styles/MainPageVideos.css';
-import {data} from './videos';
+import axios from 'axios';
 import SpecyficVideo from './Video';
 import { useLocation, Routes, Route, useParams } from 'react-router-dom';
 
@@ -13,22 +12,45 @@ function SearchPage() {
 
   const {inputSearch} = useParams();
   const decodedSearchInput = decodeURIComponent(inputSearch);
+  const [videos, setVideos] = useState([])
+  //const [videos, setVideos] = useState([])
+
+  const fetchApi = async(event) => {
+      console.log(decodedSearchInput)
+      const formData = new FormData();
+      formData.append("title", decodedSearchInput);
+
+      try {
+      const response = await axios({
+          method: "post",
+          url: "http://localhost:8080/video-details/search",
+          data: formData,
+      })
+      .then(function (res) {
+        setVideos(res.data.detailsList)
+      });
+      } catch(error) {
+          console.log(error);
+      }
+  }
+
+  useEffect(() => {
+    fetchApi();
+  },[videos.prop]);
+  console.log(videos.prop);
 
   return (
     <div className="mainPageVideos">
       <section className='videoList'>
-        {data.map((video) => {
-          if (((video.title).toLowerCase()).includes(decodedSearchInput.toLowerCase())) {
-            return (
-                <div className="mainPageVideos_videos"  key={video.title}>
-                  <SpecyficVideo key={video.title} {...video} />
-                </div>
-            );
-          } 
+        {videos.map(video => {
+          return (
+              <div className="mainPageVideos_videos"  key={video.id}>
+                <SpecyficVideo key={video.id} {...video} />
+              </div>
+          )
         })}
       </section>
     </div>
   );
-
 }
 export default SearchPage;

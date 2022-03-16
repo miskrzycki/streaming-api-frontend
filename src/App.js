@@ -7,6 +7,7 @@ import MainPageVideos from './MainPageVideos';
 import VideoPlayer from './VideoPlayer'; 
 import UploadVideo from './UploadVideo';
 import SearchPage from './SearchPage';
+import MyVideos from './MyVideos';
 import './styles/App.css';
 
 function App() {
@@ -73,7 +74,7 @@ function App() {
             <>
             <div className='app_page'>
               <Sidebar />
-              <MainPageVideos />
+              <MyVideos />
             </div>  
             </>
           } />
