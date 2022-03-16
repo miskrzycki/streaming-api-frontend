@@ -13,10 +13,8 @@ function SearchPage() {
   const {inputSearch} = useParams();
   const decodedSearchInput = decodeURIComponent(inputSearch);
   const [videos, setVideos] = useState([])
-  //const [videos, setVideos] = useState([])
 
   const fetchApi = async(event) => {
-      console.log(decodedSearchInput)
       const formData = new FormData();
       formData.append("title", decodedSearchInput);
 
@@ -37,7 +35,6 @@ function SearchPage() {
   useEffect(() => {
     fetchApi();
   },[videos.prop]);
-  console.log(videos.prop);
 
   return (
     <div className="mainPageVideos">

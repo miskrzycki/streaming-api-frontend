@@ -34,7 +34,7 @@ function MyVideos() {
                 <div key={video.id} {...video}>
                     <h1>{video.title}</h1>
                     <h4>{video.id}</h4>
-                    <Button type="primary" size="large" onClick={() => DeleteVideo(video.id)}>
+                    <Button className="buttonDelete"  onClick={() => DeleteVideo(video.id)}>
                     Delete
                     </Button>
                 </div>

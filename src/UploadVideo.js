@@ -1,9 +1,7 @@
 import React, { useState, useEffect, Component} from 'react'
 import { Typography, Button, Form, message, Input } from 'antd';
-import Dropzone from 'react-dropzone';
 import axios from 'axios';
-import { ImageOutlined, LineAxisOutlined } from '@mui/icons-material';
-
+import './styles/UploadPage.css';
 
 const UploadVideo = () => {
   const [title, setTitle] = useState('');
@@ -26,41 +24,41 @@ const UploadVideo = () => {
 
     const handleVideoFileSelect = (event) => {
         setVideoFile(event.target.files[0]);
-        console.log(event.target.files[0]);
     }
 
     const handleImageFileSelect = (event) => {
         setImageFile(event.target.files[0]);
-        console.log(event.target.files[0]);
     }
 
-    const onSubmit = async(event) => {
-        event.preventDefault()
-        const formData = new FormData();
+    function clearAll() {
+        setTitle("");
+        setDescription("");
+        setName("");
+        setVideoFile("");
+        setImageFile("");
+    }
 
+    function SubmitVideo() {
+
+        const formData = new FormData();
         formData.append("content", videoFile);
         formData.append("name", name);
         formData.append("description", description);
         formData.append("thumbnail", imageFile);
         formData.append("title", title);
         try {
-        const response = await axios({
+        axios({
             method: "post",
             url: "http://localhost:8080/streaming-api/video",
             data: formData,
         });
+        clearAll();
         } catch(error) {
             console.log(error);
             window.alert("Make sure that video file is a mp.4 file, image is .jpg file and title is unique");
         }
     }
 
-    const axios = require('axios');
-
-    axios.get("http://localhost:8080/video-details").then(resp => {
-
-        //console.log(resp.data);
-    });
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -68,7 +66,7 @@ const UploadVideo = () => {
             <h2> Upload Form</h2>
         </div>
 
-        <Form onSubmit={onSubmit}>
+        <div>
             
             <br /><br />
              <label>Name</label>
@@ -108,13 +106,11 @@ const UploadVideo = () => {
             />
             <br /><br />
 
-
-
-            <Button type="primary" size="large" onClick={onSubmit}>
+            <Button className="buttonSubmit" onClick={() => SubmitVideo()}>
                 Submit
             </Button>
 
-        </Form>
+        </div>
     </div>
     )
 }
