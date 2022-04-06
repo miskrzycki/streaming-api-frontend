@@ -1,9 +1,12 @@
 .mainPageVideos {
   flex: 0.8;
-  padding: 40px 20px;
+  padding: 40px 40px;
   padding-bottom: 0;
 }
 
+.videoList {
+  display: flex;
+}
 .mainPageVideos > h2 {
   margin-left: 5px;
   margin-bottom: 20px;
