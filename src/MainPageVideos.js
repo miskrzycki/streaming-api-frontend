@@ -16,7 +16,7 @@ function MainPageVideos() {
   
   return (
     <div className="mainPageVideos">
-      <section className='videoList'>
+      <section className='videoItems'>
         {videos.map(video => {
           return (
               <div className="mainPageVideos_videos" key={video.id}>

@@ -4,9 +4,23 @@
   padding-bottom: 0;
 }
 
-.videoList {
+.videoItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.listItem {
+  margin-bottom: 50px;
+  justify-content: center;
   display: flex;
 }
+
+.textItem {
+  width: 250px;
+  margin-right: 50px;
+}
+
 .mainPageVideos > h2 {
   margin-left: 5px;
   margin-bottom: 20px;
@@ -58,9 +72,10 @@ select {
   background-color: #f44336; /* Green */
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 60px;
+  height: 40px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
+  font-size: 20px;
+  align-self: center;
 }

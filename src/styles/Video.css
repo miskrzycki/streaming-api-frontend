@@ -1,6 +1,6 @@
 .videoCard {
   margin-bottom: 40px;
-  width: 270px;
+  width: 300px;
 }
 
 .videoCard_image {
@@ -15,7 +15,7 @@
 }
 
 .videoCard_text {
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .videoCard_text > h4 {

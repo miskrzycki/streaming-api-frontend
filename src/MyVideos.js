@@ -29,12 +29,14 @@ function MyVideos() {
         {videos.map(video => {
           return (
               <div key={video.id}>
-                <div key={video.id} {...video}>
+                <div className="listItem" key={video.id} {...video}>
+                  <div className="textItem">
                     <h1>{video.title}</h1>
                     <h4>{video.id}</h4>
-                    <Button className="buttonDelete"  onClick={() => DeleteVideo(video.id)}>
-                    Delete
-                    </Button>
+                  </div>
+                  <Button className="buttonDelete"  onClick={() => DeleteVideo(video.id)}>
+                  Delete
+                  </Button>
                 </div>
               </div>
           )
