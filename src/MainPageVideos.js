@@ -1,10 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import { useState, useEffect } from 'react';
-import ReactHlsPlayer from 'react-hls-player';
-import UploadVideo from './UploadVideo';
 import './styles/MainPageVideos.css';
-//import {data} from './videos';
 import axios from 'axios';
 import SpecyficVideo from './Video';
 
@@ -23,7 +19,7 @@ function MainPageVideos() {
       <section className='videoList'>
         {videos.map(video => {
           return (
-              <div className="mainPageVideos_videos"  key={video.id}>
+              <div className="mainPageVideos_videos" key={video.id}>
                 <SpecyficVideo key={video.id} {...video} />
               </div>
           )

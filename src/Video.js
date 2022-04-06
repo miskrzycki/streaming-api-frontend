@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { Link, State } from "react-router-dom";
 import './styles/Video.css';
 
-const Video = ({ id, streamName, description, thumbnailLink, masterLink, title }) => {
+const SpecyficVideo = ({ description, thumbnailLink, masterLink, title }) => {
 
     const [state, setstate] = useState({data:""})
 
     const setCurrentVideoUrl = () => {  
         setstate({masterLink});
-        console.log(masterLink) 
        }; 
   
     return (      
@@ -25,4 +24,4 @@ const Video = ({ id, streamName, description, thumbnailLink, masterLink, title }
     );
 };
 
-export default Video
+export default SpecyficVideo

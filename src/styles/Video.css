@@ -1,7 +1,6 @@
 .videoCard {
   margin-bottom: 40px;
   width: 270px;
-  flex-wrap: wrap;
 }
 
 .videoCard_image {
@@ -11,7 +10,6 @@
 }
 
 .videoCard_info {
-  display: flex;
   margin-top: 1px;
   padding-right: 30px;
 }

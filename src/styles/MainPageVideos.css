@@ -2,18 +2,11 @@
   flex: 0.8;
   padding: 40px 20px;
   padding-bottom: 0;
-  display: grid;
 }
 
 .mainPageVideos > h2 {
   margin-left: 5px;
   margin-bottom: 20px;
-}
-
-.mainPageVideos_videos {
-  display: flex;
-  flex-wrap: wrap;
-  display: grid;
 }
 
 @media (prefers-reduced-motion: no-preference) {

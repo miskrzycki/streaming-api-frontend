@@ -1,11 +1,9 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import { useState, useEffect } from 'react';
-import ReactHlsPlayer from 'react-hls-player';
 import './styles/MainPageVideos.css';
 import axios from 'axios';
 import SpecyficVideo from './Video';
-import { useLocation, Routes, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 function SearchPage() {
